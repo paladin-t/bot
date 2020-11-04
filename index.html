@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Bot</title>
+  <link rel="stylesheet" type="text/css" href="bot.css">
+  <style type="text/css">
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: rgb(77, 88, 100);
+      font: 14px Helvetica, Arial, sans-serif;
+    }
+    .button {
+      padding: 5px 20px 5px 20px;
+      border-radius: 6px;
+      color: #ffffff;
+      background: #1e1e1e;
+      font-size: 14px;
+      text-decoration: none;
+    }
+    .button:hover {
+      background: #7c7c7c;
+      text-decoration: none;
+    }
+    #page {
+      width: 600px;
+      margin: 2em auto;
+      padding: 20px 50px;
+      border-radius: 1em;
+      background-color: #fff;
+    }
+    #content {
+      position: relative;
+    }
+    a:link,
+    a:visited {
+      color: #69c;
+      text-decoration: none;
+    }
+    @media (max-width: 700px) {
+      body {
+        background-color: #fff;
+      }
+      #page {
+        width: auto;
+        margin: 0 auto;
+        padding: 1em;
+        border-radius: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="page">
+    <div id="content">
+      <p align="center"></p>
+        <div id="output_box">
+        </div>
+        <div id="input_box">
+          <div id="input_message">
+            <input type="text" id="message" placeholder="Enter some text here...">
+          </div>
+          <div id="input_send">
+            <input type="button" id="send" class="button" value="Send" />
+          </div>
+        </div>
+      </p>
+    </div>
+  </div>
+  <script src="bot.js"></script>
+  <script src="patterns.js"></script>
+  <script type="text/javascript">
+    var button = document.getElementById('send');
+    var input = document.getElementById('message');
+    var output = document.getElementById('output_box');
+
+    var bot = new Bot.Bot();
+    Patterns.patterns.forEach(function (pattern) {
+      bot.learn(pattern);
+    });
+
+    function send() {
+      var req = input.value;
+      if (!req || req.length == 0)
+        return;
+
+      output.innerHTML += 'You: ' + req + '<br>';
+      output.scrollTop = output.scrollHeight;
+      input.value = '';
+      bot.think(req, function (rsp) {
+        rsp = rsp.replace('\n', '<br>');
+        setTimeout(function () {
+          output.innerHTML += 'Bot: ' + rsp + '<br>';
+          output.scrollTop = output.scrollHeight;
+        }, 500);
+      });
+    }
+
+    function clear() {
+      output.innerHTML = '';
+    }
+
+    button.onclick = send;
+    input.addEventListener('keyup', function (event) {
+      if (event.key === 'Enter') {
+        send();
+      }
+    });
+    output.innerHTML += 'Tony: Hi! ';
+    output.innerHTML += 'You can chat with my agent bot, ';
+    output.innerHTML += 'or get my contact information from him. ';
+    output.innerHTML += 'He\'s been doing a good job, although he\'s a bit of a martinet.<br><br>';
+  </script>
+</body>
+</html>
