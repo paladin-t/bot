@@ -2,7 +2,7 @@
 
 Possibly the minimum rule based chatbot implementation in plain JavaScript.
 
-[Demo](https://paladin-t.github.io/bot/)
+[Demo](https://paladin-t.github.io/)
 
 ## Usage
 
