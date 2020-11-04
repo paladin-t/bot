@@ -112,11 +112,12 @@
           pattern: {
             response: [ 'There is as yet insufficient data for a meaningful answer.' ],
             callback: function (bot, words) {
+              var key = words.join(' ');
               bot.post(
                 'Would you like to search the internet?\n&emsp;' +
-                '<a href="' + 'https://google.com/search?q=' + words.toString() + '" target="_blank">Google</a>' + '&ensp;|&ensp;' +
-                '<a href="' + 'https://bing.com/search?q=' + words.toString() + '" target="_blank">Bing</a>' + '&ensp;|&ensp;' +
-                '<a href="' + 'https://duckduckgo.com/?q=' + words.toString() + '" target="_blank">DuckDuckGo</a>'
+                '<a href="' + 'https://google.com/search?q=' + key + '" target="_blank">Google</a>' + '&ensp;|&ensp;' +
+                '<a href="' + 'https://bing.com/search?q=' + key + '" target="_blank">Bing</a>' + '&ensp;|&ensp;' +
+                '<a href="' + 'https://duckduckgo.com/?q=' + key + '" target="_blank">DuckDuckGo</a>'
               );
             }
           }
