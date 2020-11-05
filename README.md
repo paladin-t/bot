@@ -1,6 +1,6 @@
 # Bot
 
-Possibly the minimum rule based chatbot implementation in plain JavaScript.
+Possibly the minimal rule based chatbot implementation in plain JavaScript.
 
 [Demo](https://paladin-t.github.io/)
 
